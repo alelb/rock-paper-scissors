@@ -2,13 +2,22 @@
   "name": "rock-paper-scissors",
   "version": "1.0.0",
   "description": "\"A rock paper scissors game implementation\"",
+  "config": {
+    "directories": {
+      "modules": "node_modules"
+    }
+  },
   "main": "index.js",
   "scripts": {
-    "start": "node app.js"    
+    "start": "node app.js",
+    "clean": "shx rm -rf $npm_package_config_directories_modules"
   },
   "author": "Alessandro La Bella",
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "shx": "^0.2.2"
   }
 }
