@@ -1,4 +1,5 @@
 const should = require('should')
+const assert = require('chai').assert
 const suite = require('mocha').suite
 const { BasePlayer, DemoPlayer, Player } = require('../src/player')
 
@@ -6,7 +7,7 @@ const { BasePlayer, DemoPlayer, Player } = require('../src/player')
 suite('BasePlayer', () => {
     var basePlayer
 
-    beforeEach(function () {
+    beforeEach(() =>  {
         basePlayer = new BasePlayer();
     })
 
@@ -19,6 +20,28 @@ suite('BasePlayer', () => {
         (() => {
             basePlayer.play()
         }).should.throw()
+        done()
+    })
+})
+
+suite('DemoPlayer', () => {
+    var demoPlayer
+
+    beforeEach(function () {
+        demoPlayer = new DemoPlayer();
+    })
+
+    it('create a new instance', (done) => {
+        should.exist(demoPlayer)
+        done()
+    })
+
+    it('calling play method returns a valid value', (done) => {
+        var value = demoPlayer.play()
+        
+        assert.isAbove(value, 0)
+        assert.isBelow(value, 4)
+
         done()
     })
 })
