@@ -12,23 +12,22 @@ class Game {
     }
 
     count() {
-        Promise.all([Promise.resolve(this.player1.play()), Promise.resolve(this.player2.play())]).then(values => {
-            
-            var result = this.referee(values[0], values[1])
-            switch(result){
-                case 0:
-                    break
-                case 1:
-                    this.scorePlayer1++
-                    break
-                case 2:
-                    this.scorePlayer2++
-                    break
-                default:
-                    break
-            }
-            return result
-        })
+        //Promise.all([this.player1.play(), this.player2.play()]).then(values => {    
+        var result = this.referee(this.player1.play(), this.player2.play())
+        switch(result){
+            case 0:
+                break
+            case 1:
+                this.scorePlayer1++
+                break
+            case 2:
+                this.scorePlayer2++
+                break
+            default:
+                break
+        }
+        return result
+        //})
     }
 
     referee(choise1, choise2) {
@@ -44,8 +43,6 @@ class Game {
     }
 
     get score() {
-        console.log('\n'+this.scorePlayer1, this.scorePlayer2+'\n')
-
         return {
             "player1": this.scorePlayer1,
             "player2": this.scorePlayer2
