@@ -36,7 +36,7 @@ suite('Game', () => {
         let score = game.score
 
         if (value === 0) {
-            assert.isTrue(score.player1 === player2)            
+            assert.isTrue(score.player1 === score.player2)            
         } else if (value === 1) {
             assert.isAbove(score.player1, score.player2)
         } else {
