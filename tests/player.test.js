@@ -1,47 +1,68 @@
-const should = require('should')
-const assert = require('chai').assert
-const suite = require('mocha').suite
-const { BasePlayer, DemoPlayer, Player } = require('../src/player')
+const should = require('should');
+const assert = require('chai').assert;
+const { BasePlayer, DemoPlayer, Player } = require('../src/player');
+const bddStdin = require('bdd-stdin');
 
+describe('BasePlayer', () => {
+  let basePlayer;
 
-suite('BasePlayer', () => {
-    var basePlayer
+  beforeEach(() => {
+    basePlayer = new BasePlayer();
+  });
 
-    beforeEach(() =>  {
-        basePlayer = new BasePlayer();
-    })
+  it('create a new instance', (done) => {
+    should.exist(basePlayer);
+    done();
+  });
 
-    it('create a new instance', (done) => {
-        should.exist(basePlayer)
-        done()
-    })
+  it('calling play method thow an error', (done) => {
+    (() => {
+      basePlayer.play();
+    }).should.throw();
+    done();
+  });
+});
 
-    it('calling play method thow an error', (done) => {
-        (() => {
-            basePlayer.play()
-        }).should.throw()
-        done()
-    })
-})
+describe('DemoPlayer', () => {
+  let demoPlayer;
 
-suite('DemoPlayer', () => {
-    var demoPlayer
+  beforeEach(() => {
+    demoPlayer = new DemoPlayer();
+  });
 
-    beforeEach(function () {
-        demoPlayer = new DemoPlayer();
-    })
+  it('create a new instance', (done) => {
+    should.exist(demoPlayer);
+    done();
+  });
 
-    it('create a new instance', (done) => {
-        should.exist(demoPlayer)
-        done()
-    })
+  it('calling play method returns a valid value', (done) => {
+    demoPlayer.play().then((value) => {
+      assert.isAbove(value.throw, 0);
+      assert.isBelow(value.throw, 4);
+      done();
+    });
+  });
+});
 
-    it('calling play method returns a valid value', (done) => {
-        var value = demoPlayer.play()
-        
-        assert.isAbove(value, 0)
-        assert.isBelow(value, 4)
+describe('Player', () => {
+  let player;
 
-        done()
-    })
-})
+  beforeEach(() => {
+    player = new Player();
+  });
+
+  it('create a new instance', (done) => {
+    should.exist(player);
+    done();
+  });
+
+  it('calling play method returns a valid value', (done) => {
+    bddStdin(bddStdin.keys.down, bddStdin.keys.down, '\n');
+
+    player.play().then((value) => {
+      assert.equal(value.throw, '1');
+      done();
+    });
+  });
+});
+

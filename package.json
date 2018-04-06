@@ -1,26 +1,30 @@
 {
   "name": "rock-paper-scissors",
   "version": "1.0.0",
-  "description": "\"A rock paper scissors game implementation\"",
+  "description": "A rock paper scissors game implementation",
   "config": {
     "directories": {
-      "modules": "node_modules"
+      "modules": "node_modules",
+      "coverage": "coverage"
     }
   },
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "clean": "shx rm -rf $npm_package_config_directories_modules",
+    "clean": "shx rm -rf $npm_package_config_directories_modules $npm_package_config_directories_coverage",
     "test": "mocha tests/",
     "coverage": "istanbul cover _mocha tests/",
-    "lint": "eslint src/"
+    "lint": "eslint src/*.js"
   },
   "author": "Alessandro La Bella",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.3"
+    "chalk": "^2.3.2",
+    "clui": "^0.3.6",
+    "inquirer": "^5.2.0"
   },
   "devDependencies": {
+    "bdd-stdin": "^0.2.0",
     "chai": "^4.1.2",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
